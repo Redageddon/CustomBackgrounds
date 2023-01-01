@@ -1,0 +1,81 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net472</TargetFramework>
+        <ApplicationVersion>1.27.0</ApplicationVersion>
+        <Authors>Redageddon</Authors>
+        <AssemblyTitle>Custom Backgrounds</AssemblyTitle>
+        <Product>CustomBackgrounds</Product>
+        <AssemblyVersion>1.27.0</AssemblyVersion>
+        <FileVersion>1.27.0</FileVersion>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+    <ItemGroup>
+        <!--Every include except for local project names should be included here-->
+        <Using Include="System" />
+        <Using Include="System.Collections.Generic" />
+        <Using Include="System.IO" />
+        <Using Include="BeatSaberMarkupLanguage" />
+        <Using Include="BeatSaberMarkupLanguage.Attributes" />
+        <Using Include="BeatSaberMarkupLanguage.Components" />
+        <Using Include="BeatSaberMarkupLanguage.Components.Settings" />
+        <Using Include="BeatSaberMarkupLanguage.MenuButtons" />
+        <Using Include="BeatSaberMarkupLanguage.ViewControllers" />
+        <Using Include="HMUI" />
+        <Using Include="IPA" />
+        <Using Include="IPA.Config " />
+        <Using Include="IPA.Config.Stores" />
+        <Using Include="SiraUtil.Zenject" />
+        <Using Include="UnityEngine" />
+        <Using Include="Zenject" />
+    </ItemGroup>
+    <ItemGroup>
+        <Reference Include="0Harmony, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>$(BeatSaberDir)\Libs\0Harmony.dll</HintPath>
+            <SpecificVersion>False</SpecificVersion>
+        </Reference>
+        <Reference Include="BSML">
+            <HintPath>$(BeatSaberDir)\Plugins\BSML.dll</HintPath>
+        </Reference>
+        <Reference Include="HMLib">
+            <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\HMLib.dll</HintPath>
+        </Reference>
+        <Reference Include="HMUI">
+            <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\HMUI.dll</HintPath>
+        </Reference>
+        <Reference Include="IPA.Loader">
+            <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\IPA.Loader.dll</HintPath>
+        </Reference>
+        <Reference Include="Main">
+            <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\Main.dll</HintPath>
+        </Reference>
+        <Reference Include="SiraUtil">
+            <HintPath>$(BeatSaberDir)\Plugins\SiraUtil.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine">
+            <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\UnityEngine.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.AssetBundleModule">
+            <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.CoreModule">
+            <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+        </Reference>
+        <Reference Include="Zenject, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\Zenject.dll</HintPath>
+            <SpecificVersion>False</SpecificVersion>
+        </Reference>
+        <Reference Include="Zenject-usage, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\Zenject-usage.dll</HintPath>
+            <SpecificVersion>False</SpecificVersion>
+        </Reference>
+    </ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Include="manifest.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Include="Settings\UI\Views\LeftScreenMenu.bsml"/>
+        <EmbeddedResource Include="Settings\UI\Views\MainScreenMenu.bsml"/>
+        <EmbeddedResource Include="Settings\UI\Views\RightScreenMenu.bsml"/>
+    </ItemGroup>
+</Project>
