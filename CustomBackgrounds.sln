@@ -1,7 +1,7 @@
 
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomBackgrounds", "CustomBackgrounds.csproj", "{C9079750-EC15-450A-A06A-2AD0235CF56B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomBackgrounds\CustomBackgrounds", "CustomBackgrounds\CustomBackgrounds.csproj", "{C9079750-EC15-450A-A06A-2AD0235CF56B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
