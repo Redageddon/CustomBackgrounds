@@ -1,7 +1,7 @@
 ﻿<vertical child-control-height='false'>
-    <vertical pad-left='50'>
-        <list id='background-list'  select-cell='backgroundSelect' expand-cell='true' stick-scrolling='true' show-scrollbar='true' />
-    </vertical>
+    <horizontal>
+        <list id='background-list' select-cell='backgroundSelect' expand-cell='true' stick-scrolling='true' show-scrollbar='true' />
+    </horizontal>
     <vertical child-control-height='false' horizontal-fit='PreferredSize'>
         <button text='Reload all backgrounds' on-click='reloadBackgrounds' pref-width='27.5'/>
     </vertical>

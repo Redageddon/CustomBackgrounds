@@ -1,4 +1,5 @@
-﻿using CustomBackgrounds.Settings;
+﻿using System.Reflection;
+using CustomBackgrounds.Settings;
 
 namespace CustomBackgrounds.Managers;
 
@@ -9,10 +10,10 @@ public class BackgroundAssetLoader : IInitializable, IDisposable
     internal BackgroundAssetLoader(PluginConfig pluginConfig)
     {
         this.pluginConfig = pluginConfig;
-        this.AssetBundle = AssetBundle.LoadFromFile(Plugin.BackgroundShaderAssetBundlePath);
+        this.SkyboxManager = new SkyboxManager(this.GetAssetBundle(), this.pluginConfig);
     }
 
-    public AssetBundle AssetBundle { get; }
+    public SkyboxManager SkyboxManager { get; }
 
     public int SelectedBackgroundIndex { get; set; }
 
@@ -20,25 +21,26 @@ public class BackgroundAssetLoader : IInitializable, IDisposable
 
     public void Dispose()
     {
-        Logger.Log.Debug("Beginning background disposing.");
+        Logger.Log.Info("Beginning background disposing.");
 
         if (this.CustomBackgroundObjects == null || this.CustomBackgroundObjects.Count == 0)
         {
-            Logger.Log.Debug("No backgrounds to dispose, finished background disposing.");
+            Logger.Log.Info("No backgrounds to dispose, finished background disposing.");
 
             return;
         }
 
         for (int i = 0; i < this.CustomBackgroundObjects.Count; i++)
         {
+            string? name = this.CustomBackgroundObjects[i]?.Name;
             this.CustomBackgroundObjects[i]?.Dispose();
             this.CustomBackgroundObjects[i] = null;
-            Logger.Log.Debug($"Disposed {this.CustomBackgroundObjects[i]?.FileName}.");
+            Logger.Log.Info($"Disposed {name}.");
         }
 
         this.SelectedBackgroundIndex = 0;
         this.CustomBackgroundObjects = null;
-        Logger.Log.Debug("Finished background disposing.");
+        Logger.Log.Info("Finished background disposing.");
     }
 
     public void Initialize()
@@ -50,6 +52,15 @@ public class BackgroundAssetLoader : IInitializable, IDisposable
         }
     }
 
+    private AssetBundle GetAssetBundle()
+    {
+        Stream customBgShader = Assembly.GetCallingAssembly().GetManifestResourceStream("CustomBackgrounds.Resources.CustomBG")!;
+        byte[] data = new byte[customBgShader.Length];
+        int _ = customBgShader.Read(data, 0, (int)customBgShader.Length);
+
+        return AssetBundle.LoadFromMemory(data);
+    }
+
     private int GetConfigIndex()
     {
         if (!string.IsNullOrEmpty(this.pluginConfig.SelectedBackground))
@@ -58,7 +69,7 @@ public class BackgroundAssetLoader : IInitializable, IDisposable
 
             for (int i = 0; i < numberOfNotes; i++)
             {
-                if (this.CustomBackgroundObjects?[i]?.FileName == this.pluginConfig.SelectedBackground)
+                if (this.CustomBackgroundObjects?[i]?.Name == this.pluginConfig.SelectedBackground)
                 {
                     return i;
                 }
@@ -70,41 +81,44 @@ public class BackgroundAssetLoader : IInitializable, IDisposable
 
     private List<CustomBackground?> GetCustomBackgrounds()
     {
-        Logger.Log.Debug("Beginning background loading.");
+        Logger.Log.Info("Beginning background loading.");
 
         List<CustomBackground?> customBackgrounds = new()
         {
             new CustomBackground("Default"),
         };
 
-        foreach (string file in Directory.GetFiles(Plugin.BackgroundsDirectory))
+        Logger.Log.Info("Successfully loaded background: Default.");
+
+        foreach (string path in Directory.GetFiles(Plugin.BackgroundsDirectory))
         {
-            string extension = Path.GetExtension(file);
+            string name = Path.GetFileName(path);
+            string extension = Path.GetExtension(path);
 
             if (extension is ".png" or ".jpeg" or ".jpg" or ".gif")
             {
                 try
                 {
-                    CustomBackground customBackground = new(file);
+                    CustomBackground customBackground = new(name);
                     customBackgrounds.Add(customBackground);
-                    Logger.Log.Debug($"Successfully loaded background: {file}.");
+                    Logger.Log.Info($"Successfully loaded background: {name}.");
                 }
                 catch (Exception ex)
                 {
-                    Logger.Log.Warn($"Failed to Load Custom Background with path '{file}'.");
+                    Logger.Log.Warn($"Failed to Load Custom Background with path '{path}'.");
                     Logger.Log.Warn(ex);
                 }
             }
         }
 
-        Logger.Log.Debug("Finished background loading.");
+        Logger.Log.Info("Finished background loading.");
 
         return customBackgrounds;
     }
 
     internal void Reload()
     {
-        Logger.Log.Debug("Reloading the BackgroundAssetLoader");
+        Logger.Log.Info("Reloading the BackgroundAssetLoader");
         this.Dispose();
         this.Initialize();
     }

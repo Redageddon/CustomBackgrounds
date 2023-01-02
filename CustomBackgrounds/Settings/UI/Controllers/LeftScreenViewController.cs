@@ -1,12 +1,14 @@
-﻿namespace CustomBackgrounds.Settings.UI.Controllers;
+﻿using CustomBackgrounds.Managers;
+
+namespace CustomBackgrounds.Settings.UI.Controllers;
 
 public class LeftScreenViewController : BSMLResourceViewController
 {
     [Inject] private PluginConfig pluginConfig = null!;
 
-    [UIComponent("custom-backgrounds")] private ToggleSetting enableBackground = null!;
+    [Inject] private BackgroundAssetLoader backgroundAssetLoader = null!;
 
-    [UIComponent("menu-previews")] private ToggleSetting previewToggle = null!;
+    [UIComponent("custom-backgrounds")] private ToggleSetting enableBackground = null!;
 
     [UIComponent("rotation-offset")] private SliderSetting offsetSlider = null!;
 
@@ -19,17 +21,7 @@ public class LeftScreenViewController : BSMLResourceViewController
         set
         {
             this.pluginConfig.Enabled = value;
-            this.NotifyPropertyChanged();
-        }
-    }
-
-    [UIValue("enablePreviews")]
-    public bool EnablePreviews
-    {
-        get => this.pluginConfig.EnablePreviews;
-        set
-        {
-            this.pluginConfig.EnablePreviews = value;
+            this.backgroundAssetLoader.SkyboxManager.EnableSkybox(value);
             this.NotifyPropertyChanged();
         }
     }
@@ -41,6 +33,7 @@ public class LeftScreenViewController : BSMLResourceViewController
         set
         {
             this.pluginConfig.RotationOffset = value;
+            this.backgroundAssetLoader.SkyboxManager.UpdateRotation(value);
             this.NotifyPropertyChanged();
         }
     }

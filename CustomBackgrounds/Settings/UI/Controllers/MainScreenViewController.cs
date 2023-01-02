@@ -24,7 +24,10 @@ public class MainScreenViewController : BSMLResourceViewController
     public void Select(TableView _, int row)
     {
         this.backgroundAssetLoader.SelectedBackgroundIndex = row;
-        this.pluginConfig.SelectedBackground = this.backgroundAssetLoader.CustomBackgroundObjects?[row]?.FileName;
+        this.pluginConfig.SelectedBackground = this.backgroundAssetLoader.CustomBackgroundObjects?[row]?.Name;
+
+        Texture2D? texture = this.backgroundAssetLoader.CustomBackgroundObjects?[row]?.Texture;
+        this.backgroundAssetLoader.SkyboxManager.UpdateTexture(texture); //todo: this
     }
 
     [UIAction("#post-parse")]
@@ -34,7 +37,7 @@ public class MainScreenViewController : BSMLResourceViewController
 
         foreach (CustomBackground? backgroundObject in this.backgroundAssetLoader.CustomBackgroundObjects!)
         {
-            this.customListTableData.data.Add(new CustomListTableData.CustomCellInfo(backgroundObject?.FileName, "Background Image", Sprite.Create(backgroundObject?.Texture, new Rect(0.0f, 0.0f, 300f, 100f), new Vector2(0.5f, 0.5f))));
+            this.customListTableData.data.Add(new CustomListTableData.CustomCellInfo(backgroundObject?.Name, "Background Image", Sprite.Create(backgroundObject?.Texture, new Rect(0.0f, 0.0f, 300f, 100f), new Vector2(0.5f, 0.5f))));
         }
 
         this.customListTableData.tableView.ReloadData();

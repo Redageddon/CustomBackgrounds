@@ -4,11 +4,9 @@ using CustomBackgrounds.Settings;
 namespace CustomBackgrounds;
 
 [Plugin(RuntimeOptions.DynamicInit)]
-[NoEnableDisable]
 public class Plugin
 {
     public static readonly string BackgroundsDirectory = Path.Combine(Environment.CurrentDirectory, "CustomBackgrounds");
-    public static readonly string BackgroundShaderAssetBundlePath = Path.Combine(BackgroundsDirectory, "SkyShaders", "CustomBG");
 
     [Init]
     public Plugin(IPA.Logging.Logger logger, IPA.Config.Config config, Zenjector zenjector)

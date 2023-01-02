@@ -1,12 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFramework>net472</TargetFramework>
         <ApplicationVersion>1.27.0</ApplicationVersion>
         <Authors>Redageddon</Authors>
         <AssemblyTitle>Custom Backgrounds</AssemblyTitle>
         <Product>CustomBackgrounds</Product>
         <AssemblyVersion>1.27.0</AssemblyVersion>
         <FileVersion>1.27.0</FileVersion>
+        <Copyright>MIT</Copyright>
+        <Version>1.0.0</Version>
+    </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net472</TargetFramework>
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
     </PropertyGroup>
@@ -74,8 +78,9 @@
         <EmbeddedResource Include="manifest.json" />
     </ItemGroup>
     <ItemGroup>
-        <EmbeddedResource Include="Settings\UI\Views\LeftScreenMenu.bsml"/>
-        <EmbeddedResource Include="Settings\UI\Views\MainScreenMenu.bsml"/>
-        <EmbeddedResource Include="Settings\UI\Views\RightScreenMenu.bsml"/>
+        <EmbeddedResource Include="Settings\UI\Views\LeftScreenMenu.bsml" />
+        <EmbeddedResource Include="Settings\UI\Views\MainScreenMenu.bsml" />
+        <EmbeddedResource Include="Settings\UI\Views\RightScreenMenu.bsml" />
+        <EmbeddedResource Include="Resources\CustomBG" />
     </ItemGroup>
 </Project>

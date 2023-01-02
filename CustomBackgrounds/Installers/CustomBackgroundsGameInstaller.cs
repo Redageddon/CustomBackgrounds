@@ -5,8 +5,8 @@ namespace CustomBackgrounds.Installers;
 
 internal class CustomBackgroundsGameInstaller : Installer
 {
-    private readonly BackgroundAssetLoader backgroundAssetLoader;
     private readonly PluginConfig config;
+    private readonly BackgroundAssetLoader backgroundAssetLoader;
 
     private CustomBackgroundsGameInstaller(PluginConfig config, BackgroundAssetLoader backgroundAssetLoader)
     {

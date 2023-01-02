@@ -2,17 +2,17 @@
 
 public class CustomBackground : IDisposable
 {
-    public CustomBackground(string fileName)
+    public CustomBackground(string name)
     {
-        this.FileName = fileName;
+        this.Name = name;
 
-        if (fileName != "Default")
+        if (name != "Default")
         {
-            this.Texture = Utilities.LoadTextureRaw(File.ReadAllBytes(Path.Combine(Plugin.BackgroundsDirectory, fileName)));
+            this.Texture = Utilities.LoadTextureRaw(File.ReadAllBytes(Path.Combine(Plugin.BackgroundsDirectory, name)));
         }
     }
 
-    public string FileName { get; }
+    public string Name { get; }
 
     public Texture2D? Texture { get; }
 
