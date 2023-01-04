@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace CustomBackgrounds.Helpers;
+﻿namespace CustomBackgrounds.Helpers;
 
 public static class AssetBundleHelpers
 {

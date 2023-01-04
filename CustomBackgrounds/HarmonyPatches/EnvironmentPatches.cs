@@ -1,7 +1,4 @@
-﻿using System.Reflection;
-using HarmonyLib;
-
-namespace CustomBackgrounds.HarmonyPatches;
+﻿namespace CustomBackgrounds.HarmonyPatches;
 
 // TODO: Patches for environment
 public class EnvironmentPatches

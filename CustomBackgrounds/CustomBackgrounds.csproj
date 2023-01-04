@@ -19,12 +19,14 @@
         <Using Include="System" />
         <Using Include="System.Collections.Generic" />
         <Using Include="System.IO" />
+        <Using Include="System.Reflection" />
         <Using Include="BeatSaberMarkupLanguage" />
         <Using Include="BeatSaberMarkupLanguage.Attributes" />
         <Using Include="BeatSaberMarkupLanguage.Components" />
         <Using Include="BeatSaberMarkupLanguage.Components.Settings" />
         <Using Include="BeatSaberMarkupLanguage.MenuButtons" />
         <Using Include="BeatSaberMarkupLanguage.ViewControllers" />
+        <Using Include="HarmonyLib" />
         <Using Include="HMUI" />
         <Using Include="IPA" />
         <Using Include="IPA.Config " />
