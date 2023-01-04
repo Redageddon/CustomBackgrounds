@@ -6,7 +6,7 @@ public class PluginConfig
 
     public string? SelectedBackground { get; set; } = "Default";
 
-    public bool HideMenuGround { get; set; } = true;
+    public bool HideMenuGround { get; set; }
 
     public bool HideMenuNotes { get; set; } = true;
 
