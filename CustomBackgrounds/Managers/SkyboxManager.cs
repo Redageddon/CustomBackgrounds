@@ -1,49 +1,77 @@
-﻿using CustomBackgrounds.Settings;
+﻿using CustomBackgrounds.Helpers;
+using CustomBackgrounds.Settings;
 
 namespace CustomBackgrounds.Managers;
 
-public class SkyboxManager
+public class SkyboxManager : IInitializable, IDisposable
 {
-    private SkyboxBehavior? skyboxBehavior;
+    private readonly BackgroundAssetLoader backgroundAssetLoader;
     private readonly PluginConfig pluginConfig;
-    private readonly AssetBundle assetBundle;
-    private readonly Material skyboxMaterial;
+    private Material? skyboxMaterial;
+    private GameObject? skyboxObject;
 
-    public SkyboxManager(AssetBundle assetBundle, PluginConfig pluginConfig)
+    internal SkyboxManager(PluginConfig pluginConfig, BackgroundAssetLoader backgroundAssetLoader)
     {
-        this.assetBundle = assetBundle;
         this.pluginConfig = pluginConfig;
-        this.skyboxMaterial = assetBundle.LoadAllAssets<Material>()[0];
-        assetBundle.Unload(false);
+        this.backgroundAssetLoader = backgroundAssetLoader;
+    }
+
+    public void Initialize()
+    {
+        this.EnableSkybox(this.pluginConfig.Enabled);
+        this.UpdateRotation(this.pluginConfig.RotationOffset);
+        this.UpdateTexture(this.backgroundAssetLoader.SelectedBackgroundIndex);
+    }
+
+    public void Dispose()
+    {
+        this.EnableSkybox(false);
     }
 
     public void EnableSkybox(bool value)
     {
         if (value)
         {
-            this.skyboxBehavior = new GameObject(nameof(SkyboxBehavior)).AddComponent<SkyboxBehavior>();
-            this.skyboxBehavior.skyboxObject.GetComponent<Renderer>().material = this.skyboxMaterial; // may have to swap load assets into this method if it doesn't work
-            UnityEngine.Object.DontDestroyOnLoad(this.skyboxBehavior);
+            if (this.skyboxObject == null)
+            {
+                this.skyboxObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                this.skyboxMaterial = this.skyboxObject.GetComponent<Renderer>().material = AssetBundleHelpers.GetMaterialFromAssetBundle();
+                this.skyboxObject.transform.position = Vector3.zero;
+                this.skyboxObject.layer = 13;
+                this.skyboxObject.name = "_SkyBGObject";
+                this.skyboxObject.transform.localScale = Vector3.one * -800;
+                this.UpdateRotation(this.pluginConfig.RotationOffset);
+                UnityEngine.Object.DontDestroyOnLoad(this.skyboxObject);
+
+                Logger.Log.Info("Enabled Skybox");
+            }
         }
         else
         {
-            UnityEngine.Object.Destroy(this.skyboxBehavior);
+            if (this.skyboxObject != null)
+            {
+                UnityEngine.Object.Destroy(this.skyboxObject);
+
+                Logger.Log.Info("Disabled Skybox");
+            }
         }
     }
 
     public void UpdateRotation(int value)
     {
-        if (this.skyboxBehavior != null)
+        if (this.skyboxObject != null)
         {
-            this.skyboxBehavior.skyboxObject.transform.rotation = Quaternion.Euler(0, value - 90, 180);
+            this.skyboxObject.transform.rotation = Quaternion.Euler(0, value - 90, 180);
+            Logger.Log.Info("Updated Rotation");
         }
     }
 
-    public void UpdateTexture(Texture2D? texture)
+    public void UpdateTexture(int row)
     {
-        if (texture != null)
+        if (this.skyboxObject != null && this.skyboxMaterial != null)
         {
-            this.skyboxMaterial.SetTexture("_Tex", texture);
+            this.skyboxMaterial.SetTexture("_Tex", this.backgroundAssetLoader.CustomBackgroundObjects?[row]?.Texture);
+            Logger.Log.Info("Updated Texture");
         }
     }
 }
