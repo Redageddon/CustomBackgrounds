@@ -1,4 +1,5 @@
 ﻿using CustomBackgrounds.Managers;
+using CustomBackgrounds.Settings;
 using CustomBackgrounds.Settings.UI;
 using CustomBackgrounds.Settings.UI.Controllers;
 
@@ -6,6 +7,13 @@ namespace CustomBackgrounds.Installers;
 
 public class CustomBackgroundsMenuInstaller : Installer
 {
+    private readonly PluginConfig config;
+
+    private CustomBackgroundsMenuInstaller(PluginConfig config)
+    {
+        this.config = config;
+    }
+
     public override void InstallBindings()
     {
         this.Container.Bind<LeftScreenViewController>().FromNewComponentAsViewController().AsSingle();
@@ -13,5 +21,6 @@ public class CustomBackgroundsMenuInstaller : Installer
         this.Container.Bind<RightScreenViewController>().FromNewComponentAsViewController().AsSingle();
         this.Container.Bind<BackgroundsFlowCoordinator>().FromNewComponentOnNewGameObject().AsSingle();
         this.Container.BindInterfacesTo<MenuButtonManager>().AsSingle();
+        this.Container.BindInterfacesAndSelfTo<CustomBackgrounds.Managers.MenuEnvironmentManager>().AsSingle();
     }
 }

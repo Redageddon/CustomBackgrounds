@@ -8,6 +8,8 @@ public class LeftScreenViewController : BSMLResourceViewController
 
     [Inject] private SkyboxManager skyboxManager = null!;
 
+    [Inject] private Managers.MenuEnvironmentManager menuEnvironmentManager = null!;
+
     [UIComponent("custom-backgrounds")] private ToggleSetting enableBackground = null!;
 
     [UIComponent("rotation-offset")] private SliderSetting offsetSlider = null!;
@@ -22,6 +24,7 @@ public class LeftScreenViewController : BSMLResourceViewController
         {
             this.pluginConfig.Enabled = value;
             this.skyboxManager.EnableSkybox(value);
+            this.menuEnvironmentManager.HideAll(value);
             this.NotifyPropertyChanged();
         }
     }

@@ -6,9 +6,17 @@ public class PluginConfig
 
     public string? SelectedBackground { get; set; } = "Default";
 
-    public bool HideMenuEnvironment { get; set; } = true;
+    public bool HideMenuGround { get; set; } = true;
+
+    public bool HideMenuNotes { get; set; } = true;
+
+    public bool HideMenuPileOfNotes { get; set; } = true;
 
     public bool HideGameEnvironment { get; set; } = true;
+
+    public bool HidePlatform { get; set; }
+
+    public bool HideGameLighting { get; set; } = true;
 
     public bool HideRings { get; set; } = true;
 

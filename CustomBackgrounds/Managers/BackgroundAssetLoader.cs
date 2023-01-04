@@ -26,7 +26,7 @@ public class BackgroundAssetLoader : IInitializable, IDisposable
 
     public void Dispose()
     {
-        Logger.Log.Info("Beginning background disposing.");
+        Logger.Log.Debug("Beginning background disposing.");
 
         if (this.CustomBackgroundObjects != null && this.CustomBackgroundObjects.Count != 0)
         {
@@ -34,36 +34,36 @@ public class BackgroundAssetLoader : IInitializable, IDisposable
             {
                 string? name = customBackground?.Name;
                 customBackground?.Dispose();
-                Logger.Log.Info($"Disposed {name}.");
+                Logger.Log.Debug($"Disposed {name}.");
             }
         }
         else
         {
-            Logger.Log.Info("No backgrounds to dispose.");
+            Logger.Log.Debug("No backgrounds to dispose.");
         }
 
         this.SelectedBackgroundIndex = 0;
         this.CustomBackgroundObjects = null;
-        Logger.Log.Info("Finished background disposing.");
+        Logger.Log.Debug("Finished background disposing.");
     }
 
     internal void Reload()
     {
-        Logger.Log.Info("Reloading the BackgroundAssetLoader");
+        Logger.Log.Debug("Reloading the BackgroundAssetLoader");
         this.Dispose();
         this.Initialize();
     }
 
     private List<CustomBackground?> GetCustomBackgrounds()
     {
-        Logger.Log.Info("Beginning background loading.");
+        Logger.Log.Debug("Beginning background loading.");
 
         List<CustomBackground?> customBackgrounds = new()
         {
             new CustomBackground("Default"),
         };
 
-        Logger.Log.Info("Successfully loaded background: Default.");
+        Logger.Log.Debug("Successfully loaded background: Default.");
 
         string[] paths = Directory.GetFiles(Plugin.BackgroundsDirectory);
 
@@ -78,7 +78,7 @@ public class BackgroundAssetLoader : IInitializable, IDisposable
                 {
                     CustomBackground customBackground = new(name);
                     customBackgrounds.Add(customBackground);
-                    Logger.Log.Info($"Successfully loaded background: {name}.");
+                    Logger.Log.Debug($"Successfully loaded background: {name}.");
                 }
                 catch (Exception ex) // Texture may fail to load correctly
                 {
@@ -88,7 +88,7 @@ public class BackgroundAssetLoader : IInitializable, IDisposable
             }
         }
 
-        Logger.Log.Info("Finished background loading.");
+        Logger.Log.Debug("Finished background loading.");
 
         return customBackgrounds;
     }

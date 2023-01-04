@@ -1,4 +1,5 @@
-﻿using CustomBackgrounds.Settings;
+﻿using CustomBackgrounds.Managers;
+using CustomBackgrounds.Settings;
 
 namespace CustomBackgrounds.Installers;
 
@@ -16,6 +17,7 @@ internal class CustomBackgroundsGameInstaller : Installer
         if (this.config.Enabled)
         {
             this.Container.BindInstance(this.config).AsSingle();
+            this.Container.BindInterfacesAndSelfTo<GameEnvironmentManager>().AsSingle();
         }
     }
 }

@@ -10,7 +10,7 @@ public class MainScreenViewController : BSMLResourceViewController
 
     [Inject] private SkyboxManager skyboxManager = null!;
 
-    [UIComponent("background-list")] public CustomListTableData customListTableData = null!;
+    [UIComponent("background-list")] private CustomListTableData customListTableData = null!;
 
     public override string ResourceName => "CustomBackgrounds.Settings.UI.Views.MainScreenMenu.bsml";
 

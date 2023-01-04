@@ -30,7 +30,7 @@ public class SkyboxManager : IInitializable, IDisposable
         {
             UnityEngine.Object.Destroy(this.skyboxObject);
 
-            Logger.Log.Info("Disposed Skybox");
+            Logger.Log.Debug("Disposed Skybox");
         }
     }
 
@@ -40,7 +40,7 @@ public class SkyboxManager : IInitializable, IDisposable
         {
             this.skyboxObject.SetActive(value);
 
-            Logger.Log.Info($"Skybox is enabled: {value}");
+            Logger.Log.Debug($"Skybox is enabled: {value}");
         }
     }
 
@@ -50,7 +50,7 @@ public class SkyboxManager : IInitializable, IDisposable
         {
             this.skyboxObject.transform.rotation = Quaternion.Euler(0, degrees - 90, 180);
 
-            Logger.Log.Info($"Updated Rotation: {degrees}");
+            Logger.Log.Debug($"Updated Rotation: {degrees}");
         }
     }
 
@@ -61,7 +61,7 @@ public class SkyboxManager : IInitializable, IDisposable
             CustomBackground? customBackground = this.backgroundAssetLoader.CustomBackgroundObjects?[index];
             this.skyboxMaterial.SetTexture("_Tex", customBackground?.Texture);
 
-            Logger.Log.Info($"Updated Texture: {customBackground?.Name}");
+            Logger.Log.Debug($"Updated Texture: {customBackground?.Name}");
         }
     }
 
@@ -77,7 +77,7 @@ public class SkyboxManager : IInitializable, IDisposable
             this.skyboxObject.transform.localScale = Vector3.one * -800;
             UnityEngine.Object.DontDestroyOnLoad(this.skyboxObject);
 
-            Logger.Log.Info("Created Skybox");
+            Logger.Log.Debug("Created Skybox");
         }
     }
 }
