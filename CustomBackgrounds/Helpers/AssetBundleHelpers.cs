@@ -4,16 +4,25 @@ namespace CustomBackgrounds.Helpers;
 
 public static class AssetBundleHelpers
 {
-    private static readonly AssetBundle AssetBundle;
+    private const string EmbeddedCustomBackgroundsAssetBundlePath = "CustomBackgrounds.Resources.CustomBG";
+    private const string MaterialAssetName = "_CustomBGMat";
+    private static readonly Material Material;
 
     static AssetBundleHelpers()
     {
-        Stream customBgShader = Assembly.GetCallingAssembly().GetManifestResourceStream("CustomBackgrounds.Resources.CustomBG")!;
-        byte[] data = new byte[customBgShader.Length];
-        int _ = customBgShader.Read(data, 0, (int)customBgShader.Length);
-
-        AssetBundle = AssetBundle.LoadFromMemory(data);
+        AssetBundle assetBundle = GetAssetBundle();
+        Material = assetBundle.LoadAsset<Material>(MaterialAssetName);
     }
 
-    internal static Material? GetMaterialFromAssetBundle() => AssetBundle.LoadAsset<Material>("_CustomBGMat");
+    private static AssetBundle GetAssetBundle()
+    {
+        Assembly customBackgroundsAssembly = Assembly.GetAssembly(typeof(Plugin));
+        Stream assetBundleStream = customBackgroundsAssembly.GetManifestResourceStream(EmbeddedCustomBackgroundsAssetBundlePath)!;
+        byte[] data = new byte[assetBundleStream.Length];
+        int _ = assetBundleStream.Read(data, 0, (int)assetBundleStream.Length);
+
+        return AssetBundle.LoadFromMemory(data);
+    }
+
+    internal static Material GetMaterialFromAssetBundle() => Material;
 }
