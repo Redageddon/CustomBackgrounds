@@ -3,6 +3,7 @@ A plugin that enables custom beatsaber backgrounds
 
 ## Installation
 Just upload any equirectangular (or any image, but equirectangular is reccomended) to the "Beat Saber\CustomBackgrounds" folder
+Acceptecd file types: png, jpeg, jpg, and gif
 
 ## Current Features:
 - Change skybox background
