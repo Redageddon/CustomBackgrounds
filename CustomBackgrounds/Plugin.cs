@@ -4,6 +4,7 @@ using CustomBackgrounds.Settings;
 namespace CustomBackgrounds;
 
 [Plugin(RuntimeOptions.DynamicInit)]
+[NoEnableDisable]
 public class Plugin
 {
     public static readonly string BackgroundsDirectory = Path.Combine(Environment.CurrentDirectory, "CustomBackgrounds");
