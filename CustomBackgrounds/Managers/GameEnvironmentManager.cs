@@ -64,7 +64,7 @@ public class GameEnvironmentManager : IInitializable
     {
         foreach (TrackLaneRingsManager trackLaneRingsManager in this.trackRings)
         {
-            trackLaneRingsManager.enabled = !shouldHide;
+            trackLaneRingsManager.gameObject.SetActive(!shouldHide);
         }
     }
 }
