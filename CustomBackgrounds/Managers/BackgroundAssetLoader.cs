@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using CustomBackgrounds.Settings;
+﻿using CustomBackgrounds.Settings;
 
 namespace CustomBackgrounds.Managers;
 
@@ -10,10 +9,7 @@ public class BackgroundAssetLoader : IInitializable, IDisposable
     internal BackgroundAssetLoader(PluginConfig pluginConfig)
     {
         this.pluginConfig = pluginConfig;
-        this.SkyboxManager = new SkyboxManager(this.GetAssetBundle(), this.pluginConfig);
     }
-
-    public SkyboxManager SkyboxManager { get; }
 
     public int SelectedBackgroundIndex { get; set; }
 
@@ -52,31 +48,11 @@ public class BackgroundAssetLoader : IInitializable, IDisposable
         }
     }
 
-    private AssetBundle GetAssetBundle()
+    internal void Reload()
     {
-        Stream customBgShader = Assembly.GetCallingAssembly().GetManifestResourceStream("CustomBackgrounds.Resources.CustomBG")!;
-        byte[] data = new byte[customBgShader.Length];
-        int _ = customBgShader.Read(data, 0, (int)customBgShader.Length);
-
-        return AssetBundle.LoadFromMemory(data);
-    }
-
-    private int GetConfigIndex()
-    {
-        if (!string.IsNullOrEmpty(this.pluginConfig.SelectedBackground))
-        {
-            int numberOfNotes = this.CustomBackgroundObjects?.Count ?? 0;
-
-            for (int i = 0; i < numberOfNotes; i++)
-            {
-                if (this.CustomBackgroundObjects?[i]?.Name == this.pluginConfig.SelectedBackground)
-                {
-                    return i;
-                }
-            }
-        }
-
-        return 0;
+        Logger.Log.Info("Reloading the BackgroundAssetLoader");
+        this.Dispose();
+        this.Initialize();
     }
 
     private List<CustomBackground?> GetCustomBackgrounds()
@@ -116,10 +92,21 @@ public class BackgroundAssetLoader : IInitializable, IDisposable
         return customBackgrounds;
     }
 
-    internal void Reload()
+    private int GetConfigIndex()
     {
-        Logger.Log.Info("Reloading the BackgroundAssetLoader");
-        this.Dispose();
-        this.Initialize();
+        if (!string.IsNullOrEmpty(this.pluginConfig.SelectedBackground))
+        {
+            int numberOfNotes = this.CustomBackgroundObjects?.Count ?? 0;
+
+            for (int i = 0; i < numberOfNotes; i++)
+            {
+                if (this.CustomBackgroundObjects?[i]?.Name == this.pluginConfig.SelectedBackground)
+                {
+                    return i;
+                }
+            }
+        }
+
+        return 0;
     }
 }

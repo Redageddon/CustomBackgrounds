@@ -1,22 +1,19 @@
-﻿using CustomBackgrounds.Managers;
-using CustomBackgrounds.Settings;
+﻿using CustomBackgrounds.Settings;
 
 namespace CustomBackgrounds.Installers;
 
 internal class CustomBackgroundsGameInstaller : Installer
 {
     private readonly PluginConfig config;
-    private readonly BackgroundAssetLoader backgroundAssetLoader;
 
-    private CustomBackgroundsGameInstaller(PluginConfig config, BackgroundAssetLoader backgroundAssetLoader)
+    private CustomBackgroundsGameInstaller(PluginConfig config)
     {
         this.config = config;
-        this.backgroundAssetLoader = backgroundAssetLoader;
     }
 
     public override void InstallBindings()
     {
-        if (this.config.Enabled && this.backgroundAssetLoader.SelectedBackgroundIndex != 0)
+        if (this.config.Enabled)
         {
             this.Container.BindInstance(this.config).AsSingle();
         }

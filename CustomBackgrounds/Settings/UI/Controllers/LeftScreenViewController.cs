@@ -6,7 +6,7 @@ public class LeftScreenViewController : BSMLResourceViewController
 {
     [Inject] private PluginConfig pluginConfig = null!;
 
-    [Inject] private BackgroundAssetLoader backgroundAssetLoader = null!;
+    [Inject] private SkyboxManager skyboxManager = null!;
 
     [UIComponent("custom-backgrounds")] private ToggleSetting enableBackground = null!;
 
@@ -21,7 +21,7 @@ public class LeftScreenViewController : BSMLResourceViewController
         set
         {
             this.pluginConfig.Enabled = value;
-            this.backgroundAssetLoader.SkyboxManager.EnableSkybox(value);
+            this.skyboxManager.EnableSkybox(value);
             this.NotifyPropertyChanged();
         }
     }
@@ -33,7 +33,7 @@ public class LeftScreenViewController : BSMLResourceViewController
         set
         {
             this.pluginConfig.RotationOffset = value;
-            this.backgroundAssetLoader.SkyboxManager.UpdateRotation(value);
+            this.skyboxManager.UpdateRotation(value);
             this.NotifyPropertyChanged();
         }
     }

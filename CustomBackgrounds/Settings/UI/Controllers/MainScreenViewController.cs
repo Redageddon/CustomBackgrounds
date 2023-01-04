@@ -8,6 +8,8 @@ public class MainScreenViewController : BSMLResourceViewController
 
     [Inject] private BackgroundAssetLoader backgroundAssetLoader = null!;
 
+    [Inject] private SkyboxManager skyboxManager = null!;
+
     [UIComponent("background-list")] public CustomListTableData customListTableData = null!;
 
     public override string ResourceName => "CustomBackgrounds.Settings.UI.Views.MainScreenMenu.bsml";
@@ -26,8 +28,7 @@ public class MainScreenViewController : BSMLResourceViewController
         this.backgroundAssetLoader.SelectedBackgroundIndex = row;
         this.pluginConfig.SelectedBackground = this.backgroundAssetLoader.CustomBackgroundObjects?[row]?.Name;
 
-        Texture2D? texture = this.backgroundAssetLoader.CustomBackgroundObjects?[row]?.Texture;
-        this.backgroundAssetLoader.SkyboxManager.UpdateTexture(texture); //todo: this
+        this.skyboxManager.UpdateTexture(row);
     }
 
     [UIAction("#post-parse")]
