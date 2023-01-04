@@ -15,30 +15,6 @@ public class BackgroundAssetLoader : IInitializable, IDisposable
 
     public List<CustomBackground?>? CustomBackgroundObjects { get; private set; }
 
-    public void Dispose()
-    {
-        Logger.Log.Info("Beginning background disposing.");
-
-        if (this.CustomBackgroundObjects == null || this.CustomBackgroundObjects.Count == 0)
-        {
-            Logger.Log.Info("No backgrounds to dispose, finished background disposing.");
-
-            return;
-        }
-
-        for (int i = 0; i < this.CustomBackgroundObjects.Count; i++)
-        {
-            string? name = this.CustomBackgroundObjects[i]?.Name;
-            this.CustomBackgroundObjects[i]?.Dispose();
-            this.CustomBackgroundObjects[i] = null;
-            Logger.Log.Info($"Disposed {name}.");
-        }
-
-        this.SelectedBackgroundIndex = 0;
-        this.CustomBackgroundObjects = null;
-        Logger.Log.Info("Finished background disposing.");
-    }
-
     public void Initialize()
     {
         if (this.CustomBackgroundObjects == null)
@@ -46,6 +22,29 @@ public class BackgroundAssetLoader : IInitializable, IDisposable
             this.CustomBackgroundObjects = this.GetCustomBackgrounds();
             this.SelectedBackgroundIndex = this.GetConfigIndex();
         }
+    }
+
+    public void Dispose()
+    {
+        Logger.Log.Info("Beginning background disposing.");
+
+        if (this.CustomBackgroundObjects != null && this.CustomBackgroundObjects.Count != 0)
+        {
+            foreach (CustomBackground? customBackground in this.CustomBackgroundObjects)
+            {
+                string? name = customBackground?.Name;
+                customBackground?.Dispose();
+                Logger.Log.Info($"Disposed {name}.");
+            }
+        }
+        else
+        {
+            Logger.Log.Info("No backgrounds to dispose.");
+        }
+
+        this.SelectedBackgroundIndex = 0;
+        this.CustomBackgroundObjects = null;
+        Logger.Log.Info("Finished background disposing.");
     }
 
     internal void Reload()
@@ -66,7 +65,9 @@ public class BackgroundAssetLoader : IInitializable, IDisposable
 
         Logger.Log.Info("Successfully loaded background: Default.");
 
-        foreach (string path in Directory.GetFiles(Plugin.BackgroundsDirectory))
+        string[] paths = Directory.GetFiles(Plugin.BackgroundsDirectory);
+
+        foreach (string path in paths)
         {
             string name = Path.GetFileName(path);
             string extension = Path.GetExtension(path);
@@ -79,7 +80,7 @@ public class BackgroundAssetLoader : IInitializable, IDisposable
                     customBackgrounds.Add(customBackground);
                     Logger.Log.Info($"Successfully loaded background: {name}.");
                 }
-                catch (Exception ex)
+                catch (Exception ex) // Texture may fail to load correctly
                 {
                     Logger.Log.Warn($"Failed to Load Custom Background with path '{path}'.");
                     Logger.Log.Warn(ex);
