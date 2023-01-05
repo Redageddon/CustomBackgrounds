@@ -16,3 +16,4 @@ Accepted file types: png, jpeg, jpg, and gif
 - Hide game platform
 - Hide game lighting
 - Hide track rings
+- Hide track mirror
