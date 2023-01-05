@@ -5,6 +5,7 @@ namespace CustomBackgrounds.Managers;
 
 public class SkyboxManager : IInitializable, IDisposable
 {
+    private readonly Texture2D defaultTexture = new(0, 0);
     private readonly BackgroundAssetLoader backgroundAssetLoader;
     private readonly PluginConfig pluginConfig;
     private Material skyboxMaterial = null!;
@@ -56,6 +57,14 @@ public class SkyboxManager : IInitializable, IDisposable
 
     public void UpdateTexture(int index)
     {
+        // Fixes flash-bang problem
+        if (index == 0)
+        {
+            this.skyboxMaterial.SetTexture("_Tex", this.defaultTexture);
+
+            return;
+        }
+
         if (this.skyboxObject != null)
         {
             CustomBackground? customBackground = this.backgroundAssetLoader.CustomBackgroundObjects?[index];
