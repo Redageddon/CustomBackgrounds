@@ -114,4 +114,15 @@ public class RightScreenViewController : BSMLResourceViewController
             this.NotifyPropertyChanged();
         }
     }
+
+    [UIValue("trackMirrorHidden")]
+    public bool TrackMirrorHidden
+    {
+        get => this.pluginConfig.HideTrackMirror;
+        set
+        {
+            this.pluginConfig.HideTrackMirror = value;
+            this.NotifyPropertyChanged();
+        }
+    }
 }

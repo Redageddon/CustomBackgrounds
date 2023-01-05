@@ -20,5 +20,7 @@ public class PluginConfig
 
     public bool HideRings { get; set; } = true;
 
+    public bool HideTrackMirror { get; set; } = true;
+
     public int RotationOffset { get; set; }
 }

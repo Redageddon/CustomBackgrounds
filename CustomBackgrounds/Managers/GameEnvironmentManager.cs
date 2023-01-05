@@ -9,6 +9,7 @@ public class GameEnvironmentManager : IInitializable
     private Renderer[] platformRenderers = null!;
     private Renderer[] lightingRenderers = null!;
     private TrackLaneRingsManager[] trackRings = null!;
+    private Renderer[] trackMirror = null!;
 
     internal GameEnvironmentManager(PluginConfig pluginConfig)
     {
@@ -21,11 +22,13 @@ public class GameEnvironmentManager : IInitializable
         this.platformRenderers = GameObject.Find("Environment/PlayersPlace").GetComponentsInChildren<Renderer>();
         this.lightingRenderers = GameObject.Find("Environment/CoreLighting").GetComponentsInChildren<Renderer>();
         this.trackRings = UnityEngine.Object.FindObjectsOfType<TrackLaneRingsManager>();
+        this.trackMirror = GameObject.Find("Environment/TrackMirror").GetComponentsInChildren<Renderer>();
 
         this.HideGameEnvironment(this.pluginConfig.HideGameEnvironment);
         this.HidePlatform(this.pluginConfig.HidePlatform);
         this.HideGameLighting(this.pluginConfig.HideGameLighting);
         this.HideRings(this.pluginConfig.HideRings);
+        this.HideTrackMirror(this.pluginConfig.HideTrackMirror);
     }
 
     public void HideGameEnvironment(bool shouldHide)
@@ -65,6 +68,14 @@ public class GameEnvironmentManager : IInitializable
         foreach (TrackLaneRingsManager trackLaneRingsManager in this.trackRings)
         {
             trackLaneRingsManager.gameObject.SetActive(!shouldHide);
+        }
+    }
+
+    public void HideTrackMirror(bool shouldHide)
+    {
+        foreach (Renderer renderer in this.trackMirror)
+        {
+            renderer.enabled = !shouldHide;
         }
     }
 }
