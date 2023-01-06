@@ -12,6 +12,10 @@ public class LeftScreenViewController : BSMLResourceViewController
 
     [UIComponent("custom-backgrounds")] private ToggleSetting enableBackground = null!;
 
+    [UIComponent("menu-enabled")] private ToggleSetting enableMenuSkybox = null!;
+
+    [UIComponent("game-enabled")] private ToggleSetting enableGameSkybox = null!;
+
     [UIComponent("rotation-offset")] private SliderSetting offsetSlider = null!;
 
     public override string ResourceName => "CustomBackgrounds.Settings.UI.Views.LeftScreenMenu.bsml";
@@ -23,8 +27,31 @@ public class LeftScreenViewController : BSMLResourceViewController
         set
         {
             this.pluginConfig.Enabled = value;
-            this.skyboxManager.EnableSkybox(value);
+            this.skyboxManager.EnableSkybox(value && this.pluginConfig.MenuEnabled);
             this.menuEnvironmentManager.HideAll(value);
+            this.NotifyPropertyChanged();
+        }
+    }
+
+    [UIValue("menuEnabled")]
+    public bool MenuEnabled
+    {
+        get => this.pluginConfig.MenuEnabled;
+        set
+        {
+            this.pluginConfig.MenuEnabled = value;
+            this.skyboxManager.EnableSkybox(this.pluginConfig.Enabled && value);
+            this.NotifyPropertyChanged();
+        }
+    }
+
+    [UIValue("gameEnabled")]
+    public bool GameEnabled
+    {
+        get => this.pluginConfig.GameEnabled;
+        set
+        {
+            this.pluginConfig.GameEnabled = value;
             this.NotifyPropertyChanged();
         }
     }

@@ -4,6 +4,10 @@ public class PluginConfig
 {
     public bool Enabled { get; set; } = true;
 
+    public bool MenuEnabled { get; set; } = true;
+
+    public bool GameEnabled { get; set; } = true;
+
     public string? SelectedBackground { get; set; } = "Default";
 
     public bool HideMenuGround { get; set; }

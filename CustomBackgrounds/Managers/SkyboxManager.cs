@@ -1,5 +1,6 @@
 ﻿using CustomBackgrounds.Helpers;
 using CustomBackgrounds.Settings;
+using UnityEngine.SceneManagement;
 
 namespace CustomBackgrounds.Managers;
 
@@ -23,6 +24,9 @@ public class SkyboxManager : IInitializable, IDisposable
         this.EnableSkybox(this.pluginConfig.Enabled);
         this.UpdateRotation(this.pluginConfig.RotationOffset);
         this.UpdateTexture(this.backgroundAssetLoader.SelectedBackgroundIndex);
+
+        SceneManager.sceneLoaded += this.SceneManagerOnSceneLoaded;     // read the method comments.
+        SceneManager.sceneUnloaded += this.SceneManagerOnSceneUnloaded; // read the method comments.
     }
 
     public void Dispose()
@@ -87,6 +91,35 @@ public class SkyboxManager : IInitializable, IDisposable
             UnityEngine.Object.DontDestroyOnLoad(this.skyboxObject);
 
             Logger.Log.Debug("Created Skybox");
+        }
+    }
+
+    // If anyone knows how I can remove the scene load/unloading but keep the menu/game enabled functionality, please tell me.
+    private void SceneManagerOnSceneLoaded(Scene scene, LoadSceneMode _)
+    {
+        if (this.pluginConfig.Enabled)
+        {
+            switch (scene.name)
+            {
+                case "MainMenu": this.EnableSkybox(this.pluginConfig.MenuEnabled);
+
+                    break;
+                case "GameCore": this.EnableSkybox(this.pluginConfig.GameEnabled);
+
+                    break;
+            }
+        }
+    }
+
+    // If anyone knows how I can remove the scene load/unloading but keep the menu/game enabled functionality, please tell me.
+    private void SceneManagerOnSceneUnloaded(Scene scene)
+    {
+        if (this.pluginConfig.Enabled)
+        {
+            if (scene.name == "GameCore")
+            {
+                this.EnableSkybox(this.pluginConfig.MenuEnabled);
+            }
         }
     }
 }
