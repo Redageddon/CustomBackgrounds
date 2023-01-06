@@ -26,7 +26,6 @@
         <Using Include="BeatSaberMarkupLanguage.Components.Settings" />
         <Using Include="BeatSaberMarkupLanguage.MenuButtons" />
         <Using Include="BeatSaberMarkupLanguage.ViewControllers" />
-        <Using Include="HarmonyLib" />
         <Using Include="HMUI" />
         <Using Include="IPA" />
         <Using Include="IPA.Config " />
@@ -36,9 +35,6 @@
         <Using Include="Zenject" />
     </ItemGroup>
     <ItemGroup>
-        <Reference Include="0Harmony">
-            <HintPath>$(BeatSaberDir)\Libs\0Harmony.dll</HintPath>
-        </Reference>
         <Reference Include="BSML">
             <HintPath>$(BeatSaberDir)\Plugins\BSML.dll</HintPath>
         </Reference>
@@ -60,9 +56,6 @@
         <Reference Include="SiraUtil">
             <HintPath>$(BeatSaberDir)\Plugins\SiraUtil.dll</HintPath>
         </Reference>
-        <Reference Include="UnityEngine">
-            <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\UnityEngine.dll</HintPath>
-        </Reference>
         <Reference Include="UnityEngine.AssetBundleModule">
             <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
         </Reference>
@@ -71,7 +64,6 @@
         </Reference>
         <Reference Include="Zenject">
             <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\Zenject.dll</HintPath>
-            <SpecificVersion>False</SpecificVersion>
         </Reference>
         <Reference Include="Zenject-usage">
             <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\Zenject-usage.dll</HintPath>
