@@ -8,6 +8,8 @@ Accepted file types: png, jpeg, jpg, and gif
 
 ## Current Features:
 - Change skybox background
+- Show/hide skybox in menu
+- Show/hide skybox in game
 - Rotate skybox background
 - Hide menu ground
 - Hide menu notes
