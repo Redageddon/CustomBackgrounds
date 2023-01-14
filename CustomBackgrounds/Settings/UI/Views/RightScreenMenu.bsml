@@ -5,18 +5,18 @@
     <tab-selector tab-tag='new-tab'/>
     <tab tags='new-tab' tab-name='Menu Environment'>
         <vertical child-control-height='false' horizontal-fit='PreferredSize'>
-            <checkbox-setting text='Hide Menu Ground' id='menu-ground' value='menuGround' apply-on-change='true' bind-value='true' hover-hint='Hides the ground in the menus'/>
-            <checkbox-setting text='Hide Menu Notes' id='menu-notes' value='menuNotes' apply-on-change='true' bind-value='true' hover-hint='Hides the notes in front of the player.'/>
-            <checkbox-setting text='Hide Menu PileOfNotes' id='menu-pile-of-notes' value='menuPileOfNotes' apply-on-change='true' bind-value='true' hover-hint='Hides the pile of notes behind the player.'/>
+            <checkbox-setting text='Hide Menu Ground' value='MenuGroundHidden' apply-on-change='true' bind-value='true' hover-hint='Hides the ground in the menus'/>
+            <checkbox-setting text='Hide Menu Notes' value='MenuNotesHidden' apply-on-change='true' bind-value='true' hover-hint='Hides the notes in front of the player.'/>
+            <checkbox-setting text='Hide Menu PileOfNotes' value='MenuPileOfNotesHidden' apply-on-change='true' bind-value='true' hover-hint='Hides the pile of notes behind the player.'/>
         </vertical>
     </tab>
     <tab tags='new-tab' tab-name='Game Environment'>
         <vertical child-control-height='false' horizontal-fit='PreferredSize'>
-            <checkbox-setting text='Hide Game Environment' id='game-environment' value='gameEnvironmentHidden' apply-on-change='true' bind-value='true' hover-hint='Hides the game environment.'/>
-            <checkbox-setting text='Hide Game Platform' id='game-platform' value='gamePlatformHidden' apply-on-change='true' bind-value='true' hover-hint='Hides the players platform.'/>
-            <checkbox-setting text='Hide Game Lighting' id='game-lighting' value='gameLightingHidden' apply-on-change='true' bind-value='true' hover-hint='Hides the lighting effects (like the lasers).'/>
-            <checkbox-setting text='Hide Track Rings' id='track-rings' value='trackRingsHidden' apply-on-change='true' bind-value='true' hover-hint='Hides the track rings.'/>
-            <checkbox-setting text='Hide Track Mirror' id='track-mirror' value='trackMirrorHidden' apply-on-change='true' bind-value='true' hover-hint='Hides the track mirror.'/>
+            <checkbox-setting text='Hide Game Environment' value='GameEnvironmentHidden' apply-on-change='true' bind-value='true' hover-hint='Hides the game environment.'/>
+            <checkbox-setting text='Hide Game Platform' value='GamePlatformHidden' apply-on-change='true' bind-value='true' hover-hint='Hides the players platform.'/>
+            <checkbox-setting text='Hide Game Lighting' value='GameLightingHidden' apply-on-change='true' bind-value='true' hover-hint='Hides the lighting effects (like the lasers).'/>
+            <checkbox-setting text='Hide Track Rings' value='TrackRingsHidden' apply-on-change='true' bind-value='true' hover-hint='Hides the track rings.'/>
+            <checkbox-setting text='Hide Track Mirror' value='TrackMirrorHidden' apply-on-change='true' bind-value='true' hover-hint='Hides the track mirror.'/>
         </vertical>
     </tab>
 </vertical>

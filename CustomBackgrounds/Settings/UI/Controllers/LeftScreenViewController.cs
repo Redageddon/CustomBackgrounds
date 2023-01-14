@@ -4,23 +4,13 @@ namespace CustomBackgrounds.Settings.UI.Controllers;
 
 public class LeftScreenViewController : BSMLResourceViewController
 {
-    [Inject] private PluginConfig pluginConfig = null!;
-
-    [Inject] private SkyboxManager skyboxManager = null!;
-
-    [Inject] private Managers.MenuEnvironmentManager menuEnvironmentManager = null!;
-
-    [UIComponent("custom-backgrounds")] private ToggleSetting enableBackground = null!;
-
-    [UIComponent("menu-enabled")] private ToggleSetting enableMenuSkybox = null!;
-
-    [UIComponent("game-enabled")] private ToggleSetting enableGameSkybox = null!;
-
-    [UIComponent("rotation-offset")] private SliderSetting offsetSlider = null!;
+    [Inject] private readonly PluginConfig pluginConfig = null!;
+    [Inject] private readonly SkyboxManager skyboxManager = null!;
+    [Inject] private readonly Managers.MenuEnvironmentManager menuEnvironmentManager = null!;
 
     public override string ResourceName => "CustomBackgrounds.Settings.UI.Views.LeftScreenMenu.bsml";
 
-    [UIValue("enabled")]
+    [UIValue(nameof(Enabled))]
     public bool Enabled
     {
         get => this.pluginConfig.Enabled;
@@ -33,7 +23,7 @@ public class LeftScreenViewController : BSMLResourceViewController
         }
     }
 
-    [UIValue("menuEnabled")]
+    [UIValue(nameof(MenuEnabled))]
     public bool MenuEnabled
     {
         get => this.pluginConfig.MenuEnabled;
@@ -45,7 +35,7 @@ public class LeftScreenViewController : BSMLResourceViewController
         }
     }
 
-    [UIValue("gameEnabled")]
+    [UIValue(nameof(GameEnabled))]
     public bool GameEnabled
     {
         get => this.pluginConfig.GameEnabled;
@@ -56,7 +46,7 @@ public class LeftScreenViewController : BSMLResourceViewController
         }
     }
 
-    [UIValue("rotation")]
+    [UIValue(nameof(Rotation))]
     public int Rotation
     {
         get => this.pluginConfig.RotationOffset;

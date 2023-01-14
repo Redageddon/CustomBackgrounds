@@ -2,25 +2,12 @@
 
 public class RightScreenViewController : BSMLResourceViewController
 {
-    [Inject] private PluginConfig pluginConfig = null!;
-
-    [Inject] private Managers.MenuEnvironmentManager menuEnvironmentManager = null!;
-
-    [UIComponent("menu-ground")] private ToggleSetting menuGroundToggle = null!;
-
-    [UIComponent("menu-notes")] private ToggleSetting menuNotesToggle = null!;
-
-    [UIComponent("menu-pile-of-notes")] private ToggleSetting menuPileOfNotesToggle = null!;
-
-    [UIComponent("game-environment")] private ToggleSetting gameEnvironmentToggle = null!;
-
-    [UIComponent("game-platform")] private ToggleSetting gamePlatformToggle = null!;
-
-    [UIComponent("track-rings")] private ToggleSetting trackRingsToggle = null!;
+    [Inject] private readonly PluginConfig pluginConfig = null!;
+    [Inject] private readonly Managers.MenuEnvironmentManager menuEnvironmentManager = null!;
 
     public override string ResourceName => "CustomBackgrounds.Settings.UI.Views.RightScreenMenu.bsml";
 
-    [UIValue("menuGround")]
+    [UIValue(nameof(MenuGroundHidden))]
     public bool MenuGroundHidden
     {
         get => this.pluginConfig.HideMenuGround;
@@ -37,7 +24,7 @@ public class RightScreenViewController : BSMLResourceViewController
         }
     }
 
-    [UIValue("menuNotes")]
+    [UIValue(nameof(MenuNotesHidden))]
     public bool MenuNotesHidden
     {
         get => this.pluginConfig.HideMenuNotes;
@@ -54,7 +41,7 @@ public class RightScreenViewController : BSMLResourceViewController
         }
     }
 
-    [UIValue("menuPileOfNotes")]
+    [UIValue(nameof(MenuPileOfNotesHidden))]
     public bool MenuPileOfNotesHidden
     {
         get => this.pluginConfig.HideMenuPileOfNotes;
@@ -71,7 +58,7 @@ public class RightScreenViewController : BSMLResourceViewController
         }
     }
 
-    [UIValue("gameEnvironmentHidden")]
+    [UIValue(nameof(GameEnvironmentHidden))]
     public bool GameEnvironmentHidden
     {
         get => this.pluginConfig.HideGameEnvironment;
@@ -82,7 +69,7 @@ public class RightScreenViewController : BSMLResourceViewController
         }
     }
 
-    [UIValue("gamePlatformHidden")]
+    [UIValue(nameof(GamePlatformHidden))]
     public bool GamePlatformHidden
     {
         get => this.pluginConfig.HidePlatform;
@@ -93,7 +80,7 @@ public class RightScreenViewController : BSMLResourceViewController
         }
     }
 
-    [UIValue("gameLightingHidden")]
+    [UIValue(nameof(GameLightingHidden))]
     public bool GameLightingHidden
     {
         get => this.pluginConfig.HideGameLighting;
@@ -104,7 +91,7 @@ public class RightScreenViewController : BSMLResourceViewController
         }
     }
 
-    [UIValue("trackRingsHidden")]
+    [UIValue(nameof(TrackRingsHidden))]
     public bool TrackRingsHidden
     {
         get => this.pluginConfig.HideRings;
@@ -115,7 +102,7 @@ public class RightScreenViewController : BSMLResourceViewController
         }
     }
 
-    [UIValue("trackMirrorHidden")]
+    [UIValue(nameof(TrackMirrorHidden))]
     public bool TrackMirrorHidden
     {
         get => this.pluginConfig.HideTrackMirror;
