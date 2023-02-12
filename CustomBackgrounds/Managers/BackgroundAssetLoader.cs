@@ -65,6 +65,11 @@ public class BackgroundAssetLoader : IInitializable, IDisposable
 
         Logger.Log.Debug("Successfully loaded background: Default.");
 
+        if (!Directory.Exists(Plugin.BackgroundsDirectory))
+        {
+            Directory.CreateDirectory(Plugin.BackgroundsDirectory);
+        }
+
         string[] paths = Directory.GetFiles(Plugin.BackgroundsDirectory);
 
         foreach (string path in paths)
