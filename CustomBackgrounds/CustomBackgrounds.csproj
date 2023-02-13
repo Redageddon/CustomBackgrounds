@@ -76,7 +76,7 @@
         <EmbeddedResource Include="Settings\UI\Views\LeftScreenMenu.bsml" />
         <EmbeddedResource Include="Settings\UI\Views\MainScreenMenu.bsml" />
         <EmbeddedResource Include="Settings\UI\Views\RightScreenMenu.bsml" />
-        <EmbeddedResource Include="Resources\CustomBG" />
+        <EmbeddedResource Include="Resources\SkyboxMaterialAssetBundle" />
     </ItemGroup>
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
         <Exec Command="copy &quot;$(ProjectDir)$(OutDir)$(ProjectName).dll&quot; &quot;$(BeatSaberDir)\Plugins\$(ProjectName).dll&quot;" />

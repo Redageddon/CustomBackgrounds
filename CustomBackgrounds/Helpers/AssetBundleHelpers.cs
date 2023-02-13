@@ -2,8 +2,8 @@
 
 public static class AssetBundleHelpers
 {
-    private const string EmbeddedCustomBackgroundsAssetBundlePath = "CustomBackgrounds.Resources.CustomBG";
-    private const string MaterialAssetName = "_CustomBGMat";
+    private const string EmbeddedCustomBackgroundsAssetBundlePath = "CustomBackgrounds.Resources.SkyboxMaterialAssetBundle";
+    private const string MaterialAssetName = "SkyboxMaterial";
     private static readonly Material Material;
 
     static AssetBundleHelpers()
