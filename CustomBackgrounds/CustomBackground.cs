@@ -8,11 +8,6 @@ public class CustomBackground : IDisposable
 
         if (name != "Default")
         {
-            if (!Directory.Exists(Plugin.BackgroundsDirectory))
-            {
-                Directory.CreateDirectory(Plugin.BackgroundsDirectory);
-            }
-
             string textureFullPath = Path.Combine(Plugin.BackgroundsDirectory, name);
             byte[] textureData = File.ReadAllBytes(textureFullPath);
             this.Texture = Utilities.LoadTextureRaw(textureData);

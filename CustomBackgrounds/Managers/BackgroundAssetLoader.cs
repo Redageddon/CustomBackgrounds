@@ -19,6 +19,7 @@ public class BackgroundAssetLoader : IInitializable, IDisposable
     {
         if (this.CustomBackgroundObjects == null)
         {
+            this.VerifyDirectory();
             this.CustomBackgroundObjects = this.GetCustomBackgrounds();
             this.SelectedBackgroundIndex = this.GetConfigIndex();
         }
@@ -54,6 +55,14 @@ public class BackgroundAssetLoader : IInitializable, IDisposable
         this.Initialize();
     }
 
+    private void VerifyDirectory()
+    {
+        if (!Directory.Exists(Plugin.BackgroundsDirectory))
+        {
+            Directory.CreateDirectory(Plugin.BackgroundsDirectory);
+        }
+    }
+
     private List<CustomBackground?> GetCustomBackgrounds()
     {
         Logger.Log.Debug("Beginning background loading.");
@@ -64,11 +73,6 @@ public class BackgroundAssetLoader : IInitializable, IDisposable
         };
 
         Logger.Log.Debug("Successfully loaded background: Default.");
-
-        if (!Directory.Exists(Plugin.BackgroundsDirectory))
-        {
-            Directory.CreateDirectory(Plugin.BackgroundsDirectory);
-        }
 
         string[] paths = Directory.GetFiles(Plugin.BackgroundsDirectory);
 
