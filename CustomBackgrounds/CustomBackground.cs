@@ -1,10 +1,8 @@
-﻿using System.Threading;
-
-namespace CustomBackgrounds;
+﻿namespace CustomBackgrounds;
 
 public class CustomBackground : IDisposable
 {
-    private byte[] textureData = Array.Empty<byte>();
+    private readonly byte[] textureData = Array.Empty<byte>();
 
     private Texture2D? texture;
 
@@ -14,9 +12,7 @@ public class CustomBackground : IDisposable
 
         if (name != "Default")
         {
-            Thread thread = new(() => { this.textureData = GetTextureData(name); });
-
-            thread.Start();
+            this.textureData = GetTextureData(name);;
         }
     }
 
