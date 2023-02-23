@@ -1,8 +1,10 @@
-﻿namespace CustomBackgrounds;
+﻿using System.Threading.Tasks;
+
+namespace CustomBackgrounds;
 
 public class CustomBackground : IDisposable
 {
-    private readonly byte[] textureData = Array.Empty<byte>();
+    private readonly Task<byte[]> task;
 
     private Texture2D? texture;
 
@@ -12,7 +14,8 @@ public class CustomBackground : IDisposable
 
         if (name != "Default")
         {
-            this.textureData = GetTextureData(name);;
+            this.task = new Task<byte[]>(this.GetTextureData);
+            this.task.Start();
         }
     }
 
@@ -22,9 +25,9 @@ public class CustomBackground : IDisposable
     {
         get
         {
-            if (!this.texture)
+            if (this.Name != "Default" && !this.texture)
             {
-                this.texture = Utilities.LoadTextureRaw(this.textureData);
+                this.texture = Utilities.LoadTextureRaw(this.task.Result);
             }
 
             return this.texture;
@@ -44,9 +47,9 @@ public class CustomBackground : IDisposable
 
     private void ReleaseUnmanagedResources() => UnityEngine.Object.Destroy(this.Texture);
 
-    private static byte[] GetTextureData(string name)
+    private byte[] GetTextureData()
     {
-        string textureFullPath = Path.Combine(Plugin.BackgroundsDirectory, name);
+        string textureFullPath = Path.Combine(Plugin.BackgroundsDirectory, this.Name);
 
         return File.ReadAllBytes(textureFullPath);
     }
