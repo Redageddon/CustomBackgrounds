@@ -1,5 +1,4 @@
 ﻿using CustomBackgrounds.Managers;
-using CustomBackgrounds.Settings;
 using CustomBackgrounds.Settings.UI;
 using CustomBackgrounds.Settings.UI.Controllers;
 
@@ -7,13 +6,6 @@ namespace CustomBackgrounds.Installers;
 
 public class CustomBackgroundsMenuInstaller : Installer
 {
-    private readonly PluginConfig config;
-
-    private CustomBackgroundsMenuInstaller(PluginConfig config)
-    {
-        this.config = config;
-    }
-
     public override void InstallBindings()
     {
         this.Container.Bind<LeftScreenViewController>().FromNewComponentAsViewController().AsSingle();
