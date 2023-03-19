@@ -27,4 +27,6 @@ public class PluginConfig
     public bool HideTrackMirror { get; set; } = true;
 
     public int RotationOffset { get; set; }
+
+    public int SkyboxSize { get; set; } = 100;
 }

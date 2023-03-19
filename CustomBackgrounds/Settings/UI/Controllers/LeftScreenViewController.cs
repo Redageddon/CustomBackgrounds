@@ -57,4 +57,16 @@ public class LeftScreenViewController : BSMLResourceViewController
             this.NotifyPropertyChanged();
         }
     }
+
+    [UIValue(nameof(Size))]
+    public int Size
+    {
+        get => this.pluginConfig.SkyboxSize;
+        set
+        {
+            this.pluginConfig.SkyboxSize = value;
+            this.skyboxManager.UpdateSize(value);
+            this.NotifyPropertyChanged();
+        }
+    }
 }

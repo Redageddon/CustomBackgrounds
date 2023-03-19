@@ -23,6 +23,7 @@ public class SkyboxManager : IInitializable, IDisposable
         this.CreateSkyboxObject();
         this.EnableSkybox(this.pluginConfig.Enabled);
         this.UpdateRotation(this.pluginConfig.RotationOffset);
+        this.UpdateSize(this.pluginConfig.SkyboxSize);
         this.UpdateTexture(this.backgroundAssetLoader.SelectedBackgroundIndex);
 
         SceneManager.sceneLoaded += this.SceneManagerOnSceneLoaded;     // read the method comments.
@@ -59,6 +60,17 @@ public class SkyboxManager : IInitializable, IDisposable
         }
     }
 
+    public void UpdateSize(int size)
+    {
+        if (this.skyboxObject != null)
+        {
+            int scale = -(int)Math.Exp(size / 14.959d);
+            this.skyboxObject.transform.localScale = Vector3.one * scale;
+
+            Logger.Log.Debug($"Updated Skybox size: {scale}");
+        }
+    }
+
     public void UpdateTexture(int index)
     {
         // Fixes flash-bang problem
@@ -87,7 +99,6 @@ public class SkyboxManager : IInitializable, IDisposable
             this.skyboxObject.transform.position = Vector3.zero;
             this.skyboxObject.layer = 13;
             this.skyboxObject.name = "_SkyBGObject";
-            this.skyboxObject.transform.localScale = Vector3.one * -800;
             UnityEngine.Object.DontDestroyOnLoad(this.skyboxObject);
 
             Logger.Log.Debug("Created Skybox");
