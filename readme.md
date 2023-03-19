@@ -11,6 +11,7 @@ Accepted file types: png, jpeg, jpg, and gif
 - Show/hide skybox in menu
 - Show/hide skybox in game
 - Rotate skybox background
+- Scale skybox size
 - Hide menu ground
 - Hide menu notes
 - Hide menu pile of notes 
