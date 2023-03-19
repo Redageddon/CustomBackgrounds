@@ -4,7 +4,7 @@ namespace CustomBackgrounds;
 
 public class CustomBackground : IDisposable
 {
-    private readonly Task<byte[]> task;
+    private readonly Task<byte[]>? task;
 
     private Texture2D? texture;
 
@@ -25,7 +25,7 @@ public class CustomBackground : IDisposable
     {
         get
         {
-            if (this.Name != "Default" && !this.texture)
+            if (this.task != null && !this.texture)
             {
                 this.texture = Utilities.LoadTextureRaw(this.task.Result);
             }

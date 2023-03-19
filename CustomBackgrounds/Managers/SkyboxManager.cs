@@ -97,29 +97,33 @@ public class SkyboxManager : IInitializable, IDisposable
     // If anyone knows how I can remove the scene load/unloading but keep the menu/game enabled functionality, please tell me.
     private void SceneManagerOnSceneLoaded(Scene scene, LoadSceneMode _)
     {
-        if (this.pluginConfig.Enabled)
+        if (!this.pluginConfig.Enabled)
         {
-            switch (scene.name)
-            {
-                case "MainMenu": this.EnableSkybox(this.pluginConfig.MenuEnabled);
+            return;
+        }
 
-                    break;
-                case "GameCore": this.EnableSkybox(this.pluginConfig.GameEnabled);
+        switch (scene.name)
+        {
+            case "MainMenu": this.EnableSkybox(this.pluginConfig.MenuEnabled);
 
-                    break;
-            }
+                break;
+            case "GameCore": this.EnableSkybox(this.pluginConfig.GameEnabled);
+
+                break;
         }
     }
 
     // If anyone knows how I can remove the scene load/unloading but keep the menu/game enabled functionality, please tell me.
     private void SceneManagerOnSceneUnloaded(Scene scene)
     {
-        if (this.pluginConfig.Enabled)
+        if (!this.pluginConfig.Enabled)
         {
-            if (scene.name == "GameCore")
-            {
-                this.EnableSkybox(this.pluginConfig.MenuEnabled);
-            }
+            return;
+        }
+
+        if (scene.name == "GameCore")
+        {
+            this.EnableSkybox(this.pluginConfig.MenuEnabled);
         }
     }
 }

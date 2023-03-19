@@ -83,17 +83,7 @@ public class BackgroundAssetLoader : IInitializable, IDisposable
 
             if (extension is ".png" or ".jpeg" or ".jpg" or ".gif")
             {
-                try
-                {
-                    CustomBackground customBackground = new(name);
-                    customBackgrounds.Add(customBackground);
-                    Logger.Log.Debug($"Successfully loaded background: {name}.");
-                }
-                catch (Exception ex) // Texture may fail to load correctly
-                {
-                    Logger.Log.Warn($"Failed to Load Custom Background with path '{path}'.");
-                    Logger.Log.Warn(ex);
-                }
+                TryAddNewCustomBackground(name, customBackgrounds, path);
             }
         }
 
@@ -102,18 +92,35 @@ public class BackgroundAssetLoader : IInitializable, IDisposable
         return customBackgrounds;
     }
 
+    private static void TryAddNewCustomBackground(string name, ICollection<CustomBackground?> customBackgrounds, string path)
+    {
+        try
+        {
+            CustomBackground customBackground = new(name);
+            customBackgrounds.Add(customBackground);
+            Logger.Log.Debug($"Successfully loaded background: {name}.");
+        }
+        catch (Exception ex) // Texture may fail to load correctly
+        {
+            Logger.Log.Warn($"Failed to Load Custom Background with path '{path}'.");
+            Logger.Log.Warn(ex);
+        }
+    }
+
     private int GetConfigIndex()
     {
-        if (!string.IsNullOrEmpty(this.pluginConfig.SelectedBackground))
+        if (string.IsNullOrEmpty(this.pluginConfig.SelectedBackground) || this.CustomBackgroundObjects == null)
         {
-            int numberOfNotes = this.CustomBackgroundObjects?.Count ?? 0;
+            return 0;
+        }
 
-            for (int i = 0; i < numberOfNotes; i++)
+        int numberOfNotes = this.CustomBackgroundObjects.Count;
+
+        for (int i = 0; i < numberOfNotes; i++)
+        {
+            if (this.CustomBackgroundObjects[i]?.Name == this.pluginConfig.SelectedBackground)
             {
-                if (this.CustomBackgroundObjects?[i]?.Name == this.pluginConfig.SelectedBackground)
-                {
-                    return i;
-                }
+                return i;
             }
         }
 
