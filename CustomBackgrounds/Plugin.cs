@@ -19,5 +19,6 @@ public class Plugin
         zenjector.Install<CustomBackgroundsCoreInstaller>(Location.App);
         zenjector.Install<CustomBackgroundsMenuInstaller>(Location.Menu);
         zenjector.Install<CustomBackgroundsGameInstaller>(Location.Player);
+        zenjector.Install<CustomBackgroundsMultiplayerGameInstaller>(Location.AlwaysMultiPlayer);
     }
 }
