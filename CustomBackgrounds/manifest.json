@@ -3,13 +3,13 @@
   "author": "Redageddon",
   "description": "A plugin which allows custom Skybox textures",
   "features": [],
-  "gameVersion": "1.29.1",
+  "gameVersion": "1.29.4",
   "id": "CustomBackgrounds",
   "name": "Custom Backgrounds",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "dependsOn": {
     "BSIPA": "^4.1.6",
     "BeatSaberMarkupLanguage": "^1.5.3",
-    "BS Utils": "^1.10.0"
+    "SiraUtil": "^3.1.2"
   }
 }
