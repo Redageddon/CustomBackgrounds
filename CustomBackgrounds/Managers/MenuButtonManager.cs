@@ -17,13 +17,7 @@ public class MenuButtonManager : IInitializable, IDisposable
 
     public void Initialize() => MenuButtons.instance.RegisterButton(this.menuButton);
 
-    public void Dispose()
-    {
-        if (MenuButtons.IsSingletonAvailable)
-        {
-            MenuButtons.instance.UnregisterButton(this.menuButton);
-        }
-    }
+    public void Dispose() => MenuButtons.instance.UnregisterButton(this.menuButton);
 
     private void ShowBackgroundFlow() => this.mainFlowCoordinator.PresentFlowCoordinator(this.backgroundsFlowCoordinator);
 }
