@@ -6,11 +6,12 @@ namespace CustomBackgrounds.Managers;
 public class GameEnvironmentManager : IInitializable
 {
     private readonly PluginConfig pluginConfig;
-    private List<Renderer>? environmentRenderers;
-    private List<Renderer>? platformRenderers;
-    private List<Renderer>? lightingRenderers;
-    private List<TrackLaneRingsManager>? trackRings;
-    private List<Renderer>? trackMirror;
+    private Renderer[]? environmentRenderers;
+    private Renderer[]? platformRenderers;
+    private Renderer[]? coreLightingRenderers;
+    private Renderer[]? bloomLightingRenderers;
+    private TrackLaneRingsManager[]? trackRings;
+    private Renderer[]? trackMirror;
 
     internal GameEnvironmentManager(PluginConfig pluginConfig)
     {
@@ -19,13 +20,12 @@ public class GameEnvironmentManager : IInitializable
 
     public void Initialize()
     {
-        this.environmentRenderers = GameObject.Find("Environment")?.GetComponentsInChildren<Renderer>().ToList();
-        this.platformRenderers = GameObject.Find("Environment/PlayersPlace")?.GetComponentsInChildren<Renderer>().ToList();
-        this.lightingRenderers = GameObject.Find("Environment/CoreLighting")?.GetComponentsInChildren<Renderer>().ToList();
-        var skybox = GameObject.Find("BloomSkyboxQuad")?.GetComponentInChildren<Renderer>();
-        if(skybox != null && this.lightingRenderers != null) this.lightingRenderers.Add(skybox);
-        this.trackRings = UnityEngine.Object.FindObjectsOfType<TrackLaneRingsManager>().ToList();
-        this.trackMirror = GameObject.Find("Environment/TrackMirror")?.GetComponentsInChildren<Renderer>().ToList();
+        this.environmentRenderers = GameObject.Find("Environment")?.GetComponentsInChildren<Renderer>();
+        this.platformRenderers = GameObject.Find("Environment/PlayersPlace")?.GetComponentsInChildren<Renderer>();
+        this.coreLightingRenderers = GameObject.Find("Environment/CoreLighting")?.GetComponentsInChildren<Renderer>();
+        this.bloomLightingRenderers = GameObject.Find("BloomSkyboxQuad")?.GetComponentsInChildren<Renderer>();
+        this.trackRings = UnityEngine.Object.FindObjectsOfType<TrackLaneRingsManager>();
+        this.trackMirror = GameObject.Find("Environment/TrackMirror")?.GetComponentsInChildren<Renderer>();
 
         this.HideGameEnvironment(this.pluginConfig.HideGameEnvironment);
         this.HidePlatform(this.pluginConfig.HidePlatform);
@@ -62,21 +62,30 @@ public class GameEnvironmentManager : IInitializable
 
     public void HideGameLighting(bool shouldHide)
     {
-        if (this.lightingRenderers == null || this.environmentRenderers == null)
+        if (this.coreLightingRenderers != null)
         {
-            return;
-        }
-
-        foreach (Renderer renderer in this.lightingRenderers)
-        {
-            renderer.enabled = !shouldHide;
-        }
-
-        foreach (Renderer renderer in this.environmentRenderers)
-        {
-            if (renderer.GetComponent<LightManager>() == null && (renderer.name.Contains("bloom") || renderer.name.Contains("light") || renderer.name.Contains("glow")))
+            foreach (Renderer renderer in this.coreLightingRenderers)
             {
-                renderer.forceRenderingOff = shouldHide;
+                renderer.enabled = !shouldHide;
+            }
+        }
+
+        if (this.bloomLightingRenderers != null)
+        {
+            foreach (Renderer renderer in this.bloomLightingRenderers)
+            {
+                renderer.enabled = !shouldHide;
+            }
+        }
+
+        if (this.environmentRenderers != null)
+        {
+            foreach (Renderer renderer in this.environmentRenderers)
+            {
+                if (renderer.GetComponent<LightManager>() == null && (renderer.name.Contains("bloom") || renderer.name.Contains("light") || renderer.name.Contains("glow")))
+                {
+                    renderer.forceRenderingOff = shouldHide;
+                }
             }
         }
     }

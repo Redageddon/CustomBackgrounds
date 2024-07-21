@@ -3,7 +3,7 @@
   "author": "Redageddon",
   "description": "A plugin which allows custom Skybox textures",
   "features": [],
-  "gameVersion": "1.37.0",
+  "gameVersion": "1.37.1",
   "id": "CustomBackgrounds",
   "name": "Custom Backgrounds",
   "version": "1.0.9",

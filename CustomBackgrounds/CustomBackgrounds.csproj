@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <ApplicationVersion>1.37.0</ApplicationVersion>
+        <ApplicationVersion>1.37.1</ApplicationVersion>
         <Authors>Redageddon</Authors>
         <AssemblyTitle>Custom Backgrounds</AssemblyTitle>
         <Product>CustomBackgrounds</Product>
-        <AssemblyVersion>1.37.0</AssemblyVersion>
-        <FileVersion>1.37.0</FileVersion>
+        <AssemblyVersion>1.37.1</AssemblyVersion>
+        <FileVersion>1.37.1</FileVersion>
         <Copyright>MIT</Copyright>
         <Version>1.0.9</Version>
     </PropertyGroup>
@@ -35,9 +35,6 @@
         <Using Include="Zenject" />
     </ItemGroup>
     <ItemGroup>
-        <Reference Include="AssetBundleLoadingTools">
-          <HintPath>$(BeatSaberDir)\Plugins\AssetBundleLoadingTools.dll</HintPath>
-        </Reference>
         <Reference Include="BSML">
             <HintPath>$(BeatSaberDir)\Plugins\BSML.dll</HintPath>
         </Reference>
@@ -80,5 +77,6 @@
     </ItemGroup>
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
         <Exec Command="copy &quot;$(ProjectDir)$(OutDir)$(ProjectName).dll&quot; &quot;$(BeatSaberDir)\Plugins\$(ProjectName).dll&quot;" />
+        <Exec Command="explorer steam://rungameid/620980" />
     </Target>
 </Project>

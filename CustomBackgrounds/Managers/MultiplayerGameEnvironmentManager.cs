@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using CustomBackgrounds.Settings;
+﻿using CustomBackgrounds.Settings;
 
 namespace CustomBackgrounds.Managers;
 
@@ -18,23 +17,13 @@ public class MultiplayerGameEnvironmentManager : IInitializable
 
     public void Initialize()
     {
-        Transform? activePlayerController = null;
-        var go = GameObject.Find("MultiplayerLocalActivePlayerController(Clone)");
-        if (go != null)
+        Transform? activePlayerController = (GameObject.Find("MultiplayerLocalActivePlayerController(Clone)") ?? GameObject.Find("MultiplayerDuelLocalActivePlayerController(Clone)"))?.transform;
+
+        if (activePlayerController == null)
         {
-            activePlayerController = go.transform;
-        }
-        else
-        {
-            go = GameObject.Find("MultiplayerDuelLocalActivePlayerController(Clone)");
-            if (go != null)
-            {
-                activePlayerController = go.transform;
-            }
-            else
-            {
-                return;
-            }
+            Logger.Log.Error("activePlayerController is missing");
+
+            return;
         }
 
         this.multiplayerEnvironment = new[]
