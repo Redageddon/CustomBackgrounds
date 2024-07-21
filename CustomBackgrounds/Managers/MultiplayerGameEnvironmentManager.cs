@@ -18,8 +18,24 @@ public class MultiplayerGameEnvironmentManager : IInitializable
 
     public void Initialize()
     {
-        Transform activePlayerController = FindUnityObjectsHelper.GetAllGameObjectsInLoadedScenes()
-                                                                 .First(gameObject => gameObject.name is "MultiplayerLocalActivePlayerController(Clone)" or "MultiplayerDuelLocalActivePlayerController(Clone)").transform;
+        Transform? activePlayerController = null;
+        var go = GameObject.Find("MultiplayerLocalActivePlayerController(Clone)");
+        if (go != null)
+        {
+            activePlayerController = go.transform;
+        }
+        else
+        {
+            go = GameObject.Find("MultiplayerDuelLocalActivePlayerController(Clone)");
+            if (go != null)
+            {
+                activePlayerController = go.transform;
+            }
+            else
+            {
+                return;
+            }
+        }
 
         this.multiplayerEnvironment = new[]
         {

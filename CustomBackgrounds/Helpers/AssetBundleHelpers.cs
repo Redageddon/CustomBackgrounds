@@ -10,6 +10,7 @@ public static class AssetBundleHelpers
     {
         AssetBundle assetBundle = GetAssetBundle();
         Material = assetBundle.LoadAsset<Material>(MaterialAssetName);
+        AssetBundleLoadingTools.Utilities.ShaderRepair.FixShaderOnMaterial(Material);
     }
 
     private static AssetBundle GetAssetBundle()
