@@ -1,4 +1,5 @@
-﻿using CustomBackgrounds.Helpers;
+﻿using System.Threading.Tasks;
+using CustomBackgrounds.Helpers;
 using CustomBackgrounds.Settings;
 using UnityEngine.SceneManagement;
 
@@ -18,13 +19,13 @@ public class SkyboxManager : IInitializable, IDisposable
         this.backgroundAssetLoader = backgroundAssetLoader;
     }
 
-    public void Initialize()
+    public async void Initialize()
     {
         this.CreateSkyboxObject();
         this.EnableSkybox(this.pluginConfig.Enabled);
         this.UpdateRotation(this.pluginConfig.RotationOffset);
         this.UpdateSize(this.pluginConfig.SkyboxSize);
-        this.UpdateTexture(this.backgroundAssetLoader.SelectedBackgroundIndex);
+        await this.UpdateTexture(this.backgroundAssetLoader.SelectedBackgroundIndex);
 
         SceneManager.sceneLoaded += this.SceneManagerOnSceneLoaded;     // read the method comments.
         SceneManager.sceneUnloaded += this.SceneManagerOnSceneUnloaded; // read the method comments.
@@ -71,7 +72,7 @@ public class SkyboxManager : IInitializable, IDisposable
         }
     }
 
-    public void UpdateTexture(int index)
+    public async Task UpdateTexture(int index)
     {
         // Fixes flash-bang problem
         if (index == 0)
@@ -84,9 +85,9 @@ public class SkyboxManager : IInitializable, IDisposable
         if (this.skyboxObject != null)
         {
             CustomBackground? customBackground = this.backgroundAssetLoader.CustomBackgroundObjects?[index];
-            this.skyboxMaterial.SetTexture("_Tex", customBackground?.Texture);
+            this.skyboxMaterial.SetTexture("_Tex", await customBackground?.GetTextureAsync()!);
 
-            Logger.Log.Debug($"Updated Texture: {customBackground?.Name}");
+            Logger.Log.Debug($"Updated Texture: {customBackground.Name}");
         }
     }
 

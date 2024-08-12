@@ -20,6 +20,7 @@
         <Using Include="System.Collections.Generic" />
         <Using Include="System.IO" />
         <Using Include="System.Reflection" />
+        <Using Include="System.Threading.Tasks" />
         <Using Include="BeatSaberMarkupLanguage" />
         <Using Include="BeatSaberMarkupLanguage.Attributes" />
         <Using Include="BeatSaberMarkupLanguage.Components" />

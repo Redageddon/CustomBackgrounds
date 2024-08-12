@@ -1,37 +1,26 @@
-﻿using System.Threading.Tasks;
-
-namespace CustomBackgrounds;
+﻿namespace CustomBackgrounds;
 
 public class CustomBackground : IDisposable
 {
-    private readonly Task<byte[]>? task;
-
     private Texture2D? texture;
+    private readonly string path;
 
     public CustomBackground(string name)
     {
         this.Name = name;
-
-        if (name != "Default")
-        {
-            this.task = new Task<byte[]>(this.GetTextureData);
-            this.task.Start();
-        }
+        this.path = Path.Combine(Plugin.BackgroundsDirectory, this.Name);
     }
 
     public string Name { get; }
 
-    public Texture2D? Texture
+    public async Task<Texture2D?> GetTextureAsync()
     {
-        get
+        if (this.Name != "Default" && !this.texture)
         {
-            if (this.task != null && !this.texture)
-            {
-                this.texture = Utilities.LoadTextureRaw(this.task.Result);
-            }
-
-            return this.texture;
+            this.texture = await Utilities.LoadImageAsync(this.path);
         }
+
+        return this.texture;
     }
 
     public void Dispose()
@@ -45,12 +34,5 @@ public class CustomBackground : IDisposable
         this.ReleaseUnmanagedResources();
     }
 
-    private void ReleaseUnmanagedResources() => UnityEngine.Object.Destroy(this.Texture);
-
-    private byte[] GetTextureData()
-    {
-        string textureFullPath = Path.Combine(Plugin.BackgroundsDirectory, this.Name);
-
-        return File.ReadAllBytes(textureFullPath);
-    }
+    private void ReleaseUnmanagedResources() => UnityEngine.Object.Destroy(this.texture);
 }
