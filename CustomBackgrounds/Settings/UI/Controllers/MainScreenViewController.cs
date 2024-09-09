@@ -37,6 +37,7 @@ public class MainScreenViewController : BSMLResourceViewController
     public async Task SetupList()
     {
         this.customListTableData.data.Clear();
+        this.map.Clear();
 
         List<CustomBackground>? backgrounds = this.backgroundAssetLoader.CustomBackgroundObjects!;
 
@@ -54,6 +55,8 @@ public class MainScreenViewController : BSMLResourceViewController
         {
             await this.UpdateCellIcon(backgroundObject);
         }
+
+        this.customListTableData.tableView.ReloadData();
     }
 
     private void AddNewCell(CustomBackground backgroundObject)
