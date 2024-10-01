@@ -21,7 +21,7 @@ public class MainScreenViewController : BSMLResourceViewController
     {
         this.backgroundAssetLoader.Reload();
         await this.SetupList();
-        await this.Select(this.customListTableData.tableView, this.backgroundAssetLoader.SelectedBackgroundIndex);
+        await this.Select(this.customListTableData.TableView, this.backgroundAssetLoader.SelectedBackgroundIndex);
     }
 
     [UIAction("backgroundSelect")]
@@ -36,7 +36,7 @@ public class MainScreenViewController : BSMLResourceViewController
     [UIAction("#post-parse")]
     public async Task SetupList()
     {
-        this.customListTableData.data.Clear();
+        this.customListTableData.Data.Clear();
         this.map.Clear();
 
         List<CustomBackground>? backgrounds = this.backgroundAssetLoader.CustomBackgroundObjects!;
@@ -46,17 +46,17 @@ public class MainScreenViewController : BSMLResourceViewController
             this.AddNewCell(backgroundObject);
         }
 
-        this.customListTableData.tableView.ReloadData();
+        this.customListTableData.TableView.ReloadData();
         int selectedBackgroundIndex = this.backgroundAssetLoader.SelectedBackgroundIndex;
-        this.customListTableData.tableView.ScrollToCellWithIdx(selectedBackgroundIndex, 0, false);
-        this.customListTableData.tableView.SelectCellWithIdx(selectedBackgroundIndex);
+        this.customListTableData.TableView.ScrollToCellWithIdx(selectedBackgroundIndex, 0, false);
+        this.customListTableData.TableView.SelectCellWithIdx(selectedBackgroundIndex);
 
         foreach (CustomBackground? backgroundObject in backgrounds)
         {
             await this.UpdateCellIcon(backgroundObject);
         }
 
-        this.customListTableData.tableView.ReloadData();
+        this.customListTableData.TableView.ReloadData();
     }
 
     private void AddNewCell(CustomBackground backgroundObject)
@@ -64,7 +64,7 @@ public class MainScreenViewController : BSMLResourceViewController
         if (!this.map.ContainsKey(backgroundObject.Name))
         {
             CustomListTableData.CustomCellInfo customCell = new(backgroundObject.Name, "Background Image");
-            this.customListTableData.data.Add(customCell);
+            this.customListTableData.Data.Add(customCell);
             this.map[backgroundObject.Name] = customCell;
         }
     }
@@ -76,6 +76,6 @@ public class MainScreenViewController : BSMLResourceViewController
 
         Texture2D? texture = await backgroundObject.GetTextureAsync();
         Sprite? icon = Sprite.Create(texture, rect, pivot);
-        this.map[backgroundObject.Name].icon = icon;
+        this.map[backgroundObject.Name].Icon = icon;
     }
 }

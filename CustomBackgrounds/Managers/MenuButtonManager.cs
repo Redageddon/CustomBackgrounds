@@ -15,9 +15,9 @@ public class MenuButtonManager : IInitializable, IDisposable
         this.menuButton = new MenuButton("Custom Backgrounds", "Change The skybox background!", this.ShowBackgroundFlow);
     }
 
-    public void Initialize() => MenuButtons.instance.RegisterButton(this.menuButton);
+    public void Initialize() => MenuButtons.Instance.RegisterButton(this.menuButton);
 
-    public void Dispose() => MenuButtons.instance.UnregisterButton(this.menuButton);
+    public void Dispose() => MenuButtons.Instance.UnregisterButton(this.menuButton);
 
     private void ShowBackgroundFlow() => this.mainFlowCoordinator.PresentFlowCoordinator(this.backgroundsFlowCoordinator);
 }
