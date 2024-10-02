@@ -1,11 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <ApplicationVersion>1.37.4</ApplicationVersion>
         <Authors>Redageddon</Authors>
         <AssemblyTitle>Custom Backgrounds</AssemblyTitle>
         <Product>CustomBackgrounds</Product>
-        <AssemblyVersion>1.37.4</AssemblyVersion>
-        <FileVersion>1.37.4</FileVersion>
         <Copyright>MIT</Copyright>
         <Version>1.2.0</Version>
     </PropertyGroup>
@@ -37,37 +34,37 @@
     </ItemGroup>
     <ItemGroup>
         <Reference Include="BSML">
-            <HintPath>$(BeatSaberDir)\$(AssemblyVersion)\Plugins\BSML.dll</HintPath>
+            <HintPath>$(BeatSaberDir)\Plugins\BSML.dll</HintPath>
         </Reference>
         <Reference Include="HMRendering">
-            <HintPath>$(BeatSaberDir)\$(AssemblyVersion)\Beat Saber_Data\Managed\HMRendering.dll</HintPath>
+            <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\HMRendering.dll</HintPath>
         </Reference>
         <Reference Include="HMUI">
-            <HintPath>$(BeatSaberDir)\$(AssemblyVersion)\Beat Saber_Data\Managed\HMUI.dll</HintPath>
+            <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\HMUI.dll</HintPath>
         </Reference>
         <Reference Include="IPA.Loader">
-            <HintPath>$(BeatSaberDir)\$(AssemblyVersion)\Beat Saber_Data\Managed\IPA.Loader.dll</HintPath>
+            <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\IPA.Loader.dll</HintPath>
         </Reference>
         <Reference Include="ViewSystem">
-            <HintPath>$(BeatSaberDir)\$(AssemblyVersion)\Beat Saber_Data\Managed\BeatSaber.ViewSystem.dll</HintPath>
+            <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\BeatSaber.ViewSystem.dll</HintPath>
         </Reference>
         <Reference Include="Main">
-            <HintPath>$(BeatSaberDir)\$(AssemblyVersion)\Beat Saber_Data\Managed\Main.dll</HintPath>
+            <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\Main.dll</HintPath>
         </Reference>
         <Reference Include="SiraUtil">
-            <HintPath>$(BeatSaberDir)\$(AssemblyVersion)\Plugins\SiraUtil.dll</HintPath>
+            <HintPath>$(BeatSaberDir)\Plugins\SiraUtil.dll</HintPath>
         </Reference>
         <Reference Include="UnityEngine.AssetBundleModule">
-            <HintPath>$(BeatSaberDir)\$(AssemblyVersion)\Beat Saber_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
+            <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
         </Reference>
         <Reference Include="UnityEngine.CoreModule">
-            <HintPath>$(BeatSaberDir)\$(AssemblyVersion)\Beat Saber_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+            <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
         </Reference>
         <Reference Include="Zenject">
-            <HintPath>$(BeatSaberDir)\$(AssemblyVersion)\Beat Saber_Data\Managed\Zenject.dll</HintPath>
+            <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\Zenject.dll</HintPath>
         </Reference>
         <Reference Include="Zenject-usage">
-            <HintPath>$(BeatSaberDir)\$(AssemblyVersion)\Beat Saber_Data\Managed\Zenject-usage.dll</HintPath>
+            <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\Zenject-usage.dll</HintPath>
         </Reference>
     </ItemGroup>
     <ItemGroup>
@@ -80,7 +77,7 @@
         <EmbeddedResource Include="Resources\SkyboxMaterialAssetBundle" />
     </ItemGroup>
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-        <Exec Command="copy &quot;$(ProjectDir)$(OutDir)$(ProjectName).dll&quot; &quot;$(BeatSaberDir)\$(AssemblyVersion)\Plugins\$(ProjectName).dll&quot;" />
+        <Exec Command="copy &quot;$(ProjectDir)$(OutDir)$(ProjectName).dll&quot; &quot;$(BeatSaberDir)\Plugins\$(ProjectName).dll&quot;" />
         <Exec Command="explorer steam://rungameid/620980" />
     </Target>
 </Project>
