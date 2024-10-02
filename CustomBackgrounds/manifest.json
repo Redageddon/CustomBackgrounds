@@ -6,7 +6,7 @@
   "gameVersion": "1.37.5",
   "id": "CustomBackgrounds",
   "name": "Custom Backgrounds",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "dependsOn": {
     "BSIPA": "^4.3.5",
     "BeatSaberMarkupLanguage": "^1.12.1",
