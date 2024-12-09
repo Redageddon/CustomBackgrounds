@@ -12,19 +12,19 @@ public class PluginConfig
 
     public bool HideMenuGround { get; set; }
 
-    public bool HideMenuNotes { get; set; } = true;
+    public bool HideMenuNotes { get; set; }
 
-    public bool HideMenuPileOfNotes { get; set; } = true;
+    public bool HideMenuPileOfNotes { get; set; }
 
-    public bool HideGameEnvironment { get; set; } = true;
+    public bool HideGameEnvironment { get; set; }
 
     public bool HidePlatform { get; set; }
 
-    public bool HideGameLighting { get; set; } = true;
+    public bool HideGameLighting { get; set; }
 
-    public bool HideRings { get; set; } = true;
+    public bool HideRings { get; set; }
 
-    public bool HideTrackMirror { get; set; } = true;
+    public bool HideTrackMirror { get; set; }
 
     public int RotationOffset { get; set; }
 

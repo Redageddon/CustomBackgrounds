@@ -4,7 +4,7 @@
         <AssemblyTitle>Custom Backgrounds</AssemblyTitle>
         <Product>CustomBackgrounds</Product>
         <Copyright>MIT</Copyright>
-        <Version>1.2.1</Version>
+        <Version>1.2.2</Version>
     </PropertyGroup>
     <PropertyGroup>
         <TargetFramework>net472</TargetFramework>
